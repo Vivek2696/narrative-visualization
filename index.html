@@ -7,7 +7,19 @@
         <link rel="stylesheet" type="text/css" href="index.css">
     </head>
 
-    <body onload="helloWorld();">
+    <body onload="initialize();">
         <h1 id="main-label">Visualization Title</h1>
+        
+        <!--Page Navigation-->
+        <button class="nav-btn" onclick="onNextSlide()">Next Slide -></button>
+
+        <!--Scene-->
+        <div id="scene">
+            <h4 id="scene-title"></h4>
+            <div id="scene-body">
+                <!--Scene container Placeholder-->
+            </div>
+        </div>
+
     </body>
 </html>

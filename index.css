@@ -1,6 +1,11 @@
 #main-label {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
+    text-align: center;
+    font-size: 50px;
+    letter-spacing: 2px;
+    line-height: 1;
+    padding: 20px;
 }
 
 body {
@@ -8,3 +13,33 @@ body {
     margin: 20px;
     padding: 10px;
 }
+
+
+.nav-btn {
+    color: black;
+    font-size: 20px;
+    font-family: helvetica;
+    text-decoration: none;
+    border: 2px solid black;
+    border-radius: 20px;
+    transition-duration: .2s;
+    -webkit-transition-duration: .2s;
+    -moz-transition-duration: .2s;
+    background-color: white;
+    padding: 4px 30px;
+}
+
+.nav-btn:hover{
+    color:white;
+    background-color:black;
+    cursor: pointer;
+    transition-duration: .2s;
+    -webkit-transition-duration: .11s;
+    -moz-transition-duration: .2s;
+}
+
+.nav-btn:active {
+    box-shadow: 0 0 9e9q inset #0009; 
+    background-color: var(--c);
+    color: #000;
+  }
