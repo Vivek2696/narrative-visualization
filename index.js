@@ -15,6 +15,9 @@ function onNextSlide(){
             break;
         case 3:
             generateSlide3();
+            break;
+        case 4:
+            generateSlide4();
             disableNextButton();
             break;
         default:  
@@ -32,6 +35,9 @@ function onPreviousSlide(){
             break;
         case 2:
             generateSlide2();
+            break;
+        case 3:
+            generateSlide3();
             enableNextButton();
             break;
         default:
@@ -54,7 +60,7 @@ function generateSlide1(){
     .append("p")
     .append("id", "scene1-paragraph")
     .append("text")
-    .text("Main Body for the slide 1. Basic overview of narrative goes here...");
+    .text("Template for slide 1.");
 }
 
 function generateSlide2(){
@@ -70,7 +76,7 @@ function generateSlide2(){
     .append("div")
     .attr("id","scene-container")
     .append("p")
-    .append("id", "scene1-paragraph")
+    .append("id", "scene2-paragraph")
     .append("text")
     .text("Template for slide 2.");
 }
@@ -88,9 +94,27 @@ function generateSlide3(){
     .append("div")
     .attr("id","scene-container")
     .append("p")
-    .append("id", "scene1-paragraph")
+    .append("id", "scene3-paragraph")
     .append("text")
     .text("Template for slide 3.");
+}
+
+function generateSlide4(){
+    //clear scene
+    var sceneContainer = d3.select("#scene-container");
+    if (sceneContainer) { sceneContainer.remove(); }
+    
+    //update the page number
+    d3.select("#scene-title")
+    .text("Page "+slide);
+
+    d3.select("#scene-body")
+    .append("div")
+    .attr("id","scene-container")
+    .append("p")
+    .append("id", "scene4-paragraph")
+    .append("text")
+    .text("Template for slide 4.");
 }
 
 function disableNextButton(){
