@@ -15,7 +15,7 @@ body {
 }
 
 
-.nav-btn {
+#nav-next-btn {
     color: black;
     font-size: 20px;
     font-family: helvetica;
@@ -27,9 +27,10 @@ body {
     -moz-transition-duration: .2s;
     background-color: white;
     padding: 4px 30px;
+    margin-left: 50px;
 }
 
-.nav-btn:hover{
+#nav-next-btn:hover:enabled{
     color:white;
     background-color:black;
     cursor: pointer;
@@ -38,8 +39,48 @@ body {
     -moz-transition-duration: .2s;
 }
 
-.nav-btn:active {
+#nav-next-btn:active:enabled{
     box-shadow: 0 0 9e9q inset #0009; 
     background-color: var(--c);
     color: #000;
-  }
+}
+
+#nav-next-btn:disabled {
+    cursor: not-allowed;
+    pointer-events: all !important;
+}
+
+#nav-prev-btn {
+    color: black;
+    font-size: 20px;
+    font-family: helvetica;
+    text-decoration: none;
+    border: 2px solid black;
+    border-radius: 20px;
+    transition-duration: .2s;
+    -webkit-transition-duration: .2s;
+    -moz-transition-duration: .2s;
+    background-color: white;
+    padding: 4px 30px;
+    margin-right: 50px;
+}
+
+#nav-prev-btn:hover:enabled{
+    color:white;
+    background-color:black;
+    cursor: pointer;
+    transition-duration: .2s;
+    -webkit-transition-duration: .11s;
+    -moz-transition-duration: .2s;
+}
+
+#nav-prev-btn:active:enabled{
+    box-shadow: 0 0 9e9q inset #0009; 
+    background-color: var(--c);
+    color: #000;
+}
+
+#nav-prev-btn:disabled {
+    cursor: not-allowed;
+    pointer-events: all !important;
+}

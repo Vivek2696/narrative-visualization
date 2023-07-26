@@ -1,25 +1,40 @@
-let slide = 0;
+let slide = 1;
 
 function initialize() {
-    onNextSlide();
+    generateSlide1();
+    disablePreviousButton();
 }
 
 function onNextSlide(){
-    //check the current slide and take action appropriately
+    //check the current slide and move forward
     slide++;
     switch (slide) {
-        case 1:
-            generateSlide1();
-            break;
         case 2:
             generateSlide2();
+            enablePreviousButton();
             break;
         case 3:
             generateSlide3();
+            disableNextButton();
+            break;
+        default:  
+            break;
+    }
+}
+
+function onPreviousSlide(){
+    //check the current slide and go back
+    slide--;
+    switch (slide) {
+        case 1:
+            generateSlide1();
+            disablePreviousButton();
+            break;
+        case 2:
+            generateSlide2();
+            enableNextButton();
             break;
         default:
-            slide = 1;
-            generateSlide1();
             break;
     }
 }
@@ -76,4 +91,20 @@ function generateSlide3(){
     .append("id", "scene1-paragraph")
     .append("text")
     .text("Template for slide 3.");
+}
+
+function disableNextButton(){
+    document.getElementById("nav-next-btn").disabled = true;
+}
+
+function enableNextButton(){
+    document.getElementById("nav-next-btn").disabled = false;
+}
+
+function disablePreviousButton(){
+    document.getElementById("nav-prev-btn").disabled = true;
+}
+
+function enablePreviousButton(){
+    document.getElementById("nav-prev-btn").disabled = false;
 }
