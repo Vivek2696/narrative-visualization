@@ -58,6 +58,9 @@ async function generateSlide1(){
     //load data
     const data = await d3.csv("https://flunky.github.io/cars2017.csv");
 
+    //parameter selection
+    var currentParameter = "highway";
+
     //Extract MPGs
     var makes_raw = [];
     var highway_mpgs_raw = [];
@@ -72,9 +75,6 @@ async function generateSlide1(){
     makes = makes_raw.filter(function(x) { return x != undefined && x != null; });
     highway_mpgs = highway_mpgs_raw.filter(function(x) { return x != undefined && x != null; });
     city_mpgs = city_mpgs_raw.filter(function(x) { return x != undefined && x != null; });
-    console.log(makes);
-    console.log(highway_mpgs);
-    console.log(city_mpgs);
 
     var cleaned_data = { Make:makes, AverageHighwayMPG:highway_mpgs, AverageCityMPG:city_mpgs };
 
@@ -106,7 +106,64 @@ async function generateSlide1(){
 
     d3.select("#scene-body")
       .append("div")
-      .attr("id", "scene-container")
+      .attr("id", "scene-container");
+
+    d3.select("#scene-container")
+      .append("div")
+      .attr("id", "chart1-Domain")
+      .append("label").html("Average Highway MPG")
+      .style("color", "#1e90ff")
+      .insert("input")
+      .attr("type","radio")
+      .attr("name","domain")
+      .attr("value","highway")
+      .attr("checked", true);
+
+    d3.select("#chart1-Domain")
+      .append("label").html("Average City MPG")
+      .style("color", "#DC582A")
+      .style("margin-left", "10px")
+      .insert("input")
+      .attr("type","radio")
+      .attr("name","domain")
+      .attr("value","city")
+
+    var parameterChanged = function(d) {
+        if(this.value === "highway"){
+            d3.select("#chart1")
+              .selectAll("rect")
+              .transition()
+              .duration(1000)
+              .attr("fill", "#1e90ff")
+              .attr("width", function(d, i) { return xAxisScale(highway_mpgs[i]); });
+        }
+        else{
+            d3.select("#chart1")
+              .selectAll("rect")
+              .transition()
+              .duration(1000)
+              .attr("fill", "#DC582A")
+              .attr("width", function(d, i) { return xAxisScale(city_mpgs[i]); });
+        }
+    }
+
+    const radioButtons = d3.select("#chart1-Domain").selectAll("input");
+    radioButtons.on("change", parameterChanged)
+
+    var currentTooltipValue = function(d) {
+        currentIndex = makes.indexOf(d);
+        if(currentIndex != -1){
+            if(currentParameter === "highway"){
+                return "MPG: " + highway_mpgs[currentIndex];
+            }
+            else{
+                return "MPG: " + city_mpgs[currentIndex];
+            }
+        }
+        else{
+            return "MPG: Error";
+        }
+    }
 
     d3.select("#scene-container")
     .append("svg")
@@ -137,9 +194,8 @@ async function generateSlide1(){
       .attr("height", yAxisScale.bandwidth() - 10)
       .attr("fill", "#1e90ff")
       .on("mouseover", function(event, d) {
-            console.log("Creating tooltip at: ("+event.pageX+","+event.pageY+") with :"+d);
             chart1_tooltip.style("opacity", 0.9);
-            chart1_tooltip.html(d)
+            chart1_tooltip.text(currentTooltipValue(d))
                           .style("left", (event.pageX) + "px")
                           .style("top", (event.pageY) + "px");
       })
