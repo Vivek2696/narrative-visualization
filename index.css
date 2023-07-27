@@ -84,3 +84,18 @@ body {
     cursor: not-allowed;
     pointer-events: all !important;
 }
+
+div.tooltip {
+    position: absolute;
+    text-align: center;
+    width: 90px;
+    height: 38px;
+    padding: 2px;
+    font-family: 'Helvetica Light', sans-serif;
+    font-weight: lighter;
+    font: 18px sans-serif;
+    background: rgb(174, 181, 190);
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+}
