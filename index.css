@@ -99,3 +99,36 @@ div.tooltip {
     border-radius: 8px;
     pointer-events: none;
 }
+
+div#annotation {
+    position: absolute;
+    text-align: center;
+    width: 250px;
+    height: 50px;
+    padding: 2px;
+    font-family: 'Helvetica Light', sans-serif;
+    font-weight: lighter;
+    font: 18px sans-serif;
+    color: red !important;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+    border-radius: 5px;
+    border: solid 1px #000;
+}
+
+div#chart1-Domain
+input:hover {
+    cursor: pointer;
+}
+
+div#chart1-Domain
+label:hover {
+    cursor: pointer;
+}
+
+svg#chart2
+circle {
+    fill: dodgerblue !important;
+    stroke: black !important;
+}

@@ -202,9 +202,21 @@ async function generateSlide1(){
       .on("mouseout", function(d, i) {
             chart1_tooltip.style("opacity", 0);
       });
+
+      //annotation
+      d3.select("#annotation").remove();
+      d3.select("body")
+        .append("div")
+        .attr("id", "annotation")
+        .style("top", "400px")
+        .style("left", "800px")
+        .html("Hyundai has the highest MPG because of Electric Engine.")
 }
 
-function generateSlide2(){
+async function generateSlide2(){
+    //load data
+    const data = await d3.csv("https://flunky.github.io/cars2017.csv");
+
     //clear scene
     var sceneContainer = d3.select("#scene-container");
     if (sceneContainer) { sceneContainer.remove(); } 
@@ -216,13 +228,57 @@ function generateSlide2(){
     d3.select("#scene-body")
     .append("div")
     .attr("id","scene-container")
-    .append("p")
-    .append("id", "scene2-paragraph")
-    .append("text")
-    .text("Template for slide 2.");
+
+    //annotation
+    d3.select("#annotation").remove();
+    d3.select("body")
+    .append("div")
+    .attr("id", "annotation")
+    .style("top", "400px")
+    .style("left", "500px")
+    .html("The smaller size of Engine perofrms better.");
+
+
+    var xAxisScale = d3.scaleLog()
+                       .domain([10,150])
+                       .range([0,900]);
+    var yAxisScale = d3.scaleLog()
+                       .domain([10,150])
+                       .range([900,0]);
+
+    d3.select("#scene-container")
+      .append("svg")
+      .attr("id","chart2")
+      .attr("width", svgWidth.toString() + "px")
+      .attr("height", svgHeight.toString() + "px");
+
+    d3.select("#chart2")
+      .append("g")
+      .attr("transform", "translate(100,50)")
+      .call(d3.axisLeft(yAxisScale).tickValues([10,20,50,100]));
+
+    d3.select("#chart2")
+      .append("g")
+      .attr("transform", "translate(100,"+ Number(chartHeight + 50) +")")
+      .call(d3.axisBottom(xAxisScale).tickValues([10,20,50,100]));
+
+    d3.select("#chart2")
+      .append("g")
+      .attr("transform", "translate(100,50)")
+      .selectAll("circle")
+      .data(data)
+      .enter()
+      .append("circle")
+      .attr("cx", function(d) { return xAxisScale(d.AverageCityMPG); })
+      .attr("cy", function(d) { return yAxisScale(d.AverageHighwayMPG); })
+      .attr("r", function(d) { return Number(d.EngineCylinders) + 2; })
+
 }
 
-function generateSlide3(){
+async function generateSlide3(){
+    //load data
+    const data = await d3.csv("https://flunky.github.io/cars2017.csv");
+
     //clear scene
     var sceneContainer = d3.select("#scene-container");
     if (sceneContainer) { sceneContainer.remove(); }
@@ -238,6 +294,14 @@ function generateSlide3(){
     .append("id", "scene3-paragraph")
     .append("text")
     .text("Template for slide 3.");
+
+    d3.select("#annotation").remove();
+    d3.select("body")
+    .append("div")
+    .attr("id", "annotation")
+    .style("top", "400px")
+    .style("left", "800px")
+    .html("Annotation for slide 3.");
 }
 
 function generateSlide4(){
@@ -256,6 +320,8 @@ function generateSlide4(){
     .append("id", "scene4-paragraph")
     .append("text")
     .text("Template for slide 4.");
+
+    d3.select("#annotation").remove();
 }
 
 function disableNextButton(){
