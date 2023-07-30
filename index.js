@@ -189,7 +189,7 @@ async function generateSlide1(){
       .enter()
       .append("rect")
       .attr("x", 0)
-      .attr("y", function(d, i) { return yAxisScale(makes[i]); })
+      .attr("y", function(d, i) { return Number(yAxisScale(makes[i]) + 5); })
       .attr("width", function(d, i) { return xAxisScale(highway_mpgs[i]); })
       .attr("height", yAxisScale.bandwidth() - 10)
       .attr("fill", "#1e90ff")
@@ -224,6 +224,16 @@ async function generateSlide2(){
     //update the page number
     d3.select("#scene-title")
     .text("Page "+slide);
+
+    var chart2_tooltip = d3.select("body")
+                           .append("div")
+                           .append("div")
+                           .style("opacity", 0)
+                           .attr("class", "tooltip")
+                           .style("background-color", "black")
+                           .style("color", "white")
+                           .style("border-radius", "5px")
+                           .style("padding", "15px");
 
     d3.select("#scene-body")
     .append("div")
@@ -272,6 +282,19 @@ async function generateSlide2(){
       .attr("cx", function(d) { return xAxisScale(d.AverageCityMPG); })
       .attr("cy", function(d) { return yAxisScale(d.AverageHighwayMPG); })
       .attr("r", function(d) { return Number(d.EngineCylinders) + 2; })
+      .on("mouseover", function(event, d) {
+        chart2_tooltip.text(d.EngineCylinders + "Cylinders" +
+                            "(Hwy: " + d.AverageHighwayMPG + ", " +
+                            "Cty:" + d.AverageCityMPG + ")")
+                      .style("top", (event.pageY) + "px")
+                      .style("left", (event.pageX) + "px")
+                      .style("height", "60px")
+                      .style("width", "150px");
+        chart2_tooltip.style("opacity", 0.9)
+      })
+      .on("mouseout", function(event, d) { 
+        chart2_tooltip.style("opacity", 0);
+      });
 
 }
 
@@ -289,11 +312,7 @@ async function generateSlide3(){
 
     d3.select("#scene-body")
     .append("div")
-    .attr("id","scene-container")
-    .append("p")
-    .append("id", "scene3-paragraph")
-    .append("text")
-    .text("Template for slide 3.");
+    .attr("id","scene-container");
 
     d3.select("#annotation").remove();
     d3.select("body")
@@ -302,6 +321,14 @@ async function generateSlide3(){
     .style("top", "400px")
     .style("left", "800px")
     .html("Annotation for slide 3.");
+
+    d3.select("#scene-container")
+      .append("svg")
+      .attr("id", "chart3")
+      .attr("width", svgWidth + "px")
+      .attr("height", svgHeight + "px");
+
+
 }
 
 function generateSlide4(){
