@@ -329,6 +329,46 @@ async function generateSlide3(){
       .attr("height", svgHeight + "px");
 
 
+    var cylinders = ["2", "4", "6", "8", "10", "12"];
+
+    var xAxisScale = d3.scaleBand().range([0, chartWidth])
+                                   .domain(data.map(function (d) { return d.Fuel; }));
+
+    var yAxisScale = d3.scaleBand().range([chartHeight, 0])
+                                   .domain(cylinders);
+
+    var getChart3CircleColor = function (fuelType) {
+        if (fuelType === "Diesel") {
+            return "#1E90FF";
+        }
+        else if (fuelType === "Gasoline") {
+            return "#DC582A";
+        }
+        else {
+            return "#00AFB1";
+        }
+    }
+
+    d3.select("#chart3")
+      .append("g")
+      .attr("transform", "translate(50,"+Number(chartHeight+50)+")")
+      .call(d3.axisBottom(xAxisScale).ticks(5));
+
+    d3.select("#chart3")
+      .append("g")
+      .attr("transform", "translate(50,50)")
+      .call(d3.axisLeft(yAxisScale));
+    
+    d3.select("#chart3")
+      .selectAll("circle")
+      .data(data)
+      .enter().append("circle")
+      .attr("cx", function (d) { return 200 + xAxisScale(d.Fuel); })
+      .attr("cy", function (d) { return 900 - 70 * d.EngineCylinders; })
+      .attr("r", function (d) { return d.AverageHighwayMPG / 1.5; })
+      .attr("fill", function(d) { return getChart3CircleColor(d.Fuel) })
+      .attr("stroke", "black")
+      .attr("opacity", 0.1);
 }
 
 function generateSlide4(){
