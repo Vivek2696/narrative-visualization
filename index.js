@@ -349,7 +349,7 @@ async function generateSlide3(){
     .style("top", "400px")
     .style("left", "800px")
     .style("height", "100px")
-    .html("The Diesel and Petrol engine cars performs similar, while Petrol engine has better fuel effenciency for 4 cylinders.");
+    .html("The Diesel and Petrol engine cars performs similar, while Petrol engine has better fuel efficiency for 4 cylinders.");
 
     d3.select("#scene-container")
       .append("svg")
