@@ -102,6 +102,14 @@ async function generateSlide1(){
       .append("div")
       .attr("id", "scene-container");
 
+    d3.select("#chart-question")
+      .text("How well all car models performs in Fuel MPG?")
+
+    d3.select("#chart-description")
+      .text("Now a days all automoblie companies are implementing the new technology for their cars to make"+
+            " it more morder and efficient in terms of fuel consumption and fuel efficiency. Let's see how "+
+            "well all of the cars models that are performing in terms of Fuel MPG.")
+
     d3.select("#scene-container")
       .append("div")
       .attr("id", "chart1-Domain")
@@ -202,7 +210,7 @@ async function generateSlide1(){
       d3.select("body")
         .append("div")
         .attr("id", "annotation")
-        .style("top", "400px")
+        .style("top", "500px")
         .style("left", "800px")
         .style("height", "50px")
         .html("Hyundai has the highest MPG because of Electric Engine.")
@@ -250,12 +258,20 @@ async function generateSlide2(){
     .append("div")
     .attr("id","scene-container")
 
+    d3.select("#chart-question")
+      .text("How does Highway and City MPG compares for all type of Cars?")
+
+    d3.select("#chart-description")
+      .text("The fuel efficiency differs for the highway and the city, due to the different driving "+
+            "styles. So, Looking at all the car models and see how are those performing on their "+
+            "highway and city MPG by the factor of cylinders.")
+
     //annotation
     d3.select("#annotation").remove();
     d3.select("body")
     .append("div")
     .attr("id", "annotation")
-    .style("top", "400px")
+    .style("top", "500px")
     .style("left", "500px")
     .style("height", "50px")
     .html("The smaller size of Engine perofrms better.");
@@ -342,11 +358,19 @@ async function generateSlide3(){
     .append("div")
     .attr("id","scene-container");
 
+    d3.select("#chart-question")
+      .text("How the fuel efficienty differs with respect to fuel type, Engine cylinders?")
+
+    d3.select("#chart-description")
+      .text("From the previous charts we can see that the electric engine performs way better in fuel "+
+            "efficiency. So, comparing all cars model's fuel efficiency with two factors of engine "+
+            "cylinders and fuel inake method (Diesel, Gasoline and Electric).")
+
     d3.select("#annotation").remove();
     d3.select("body")
     .append("div")
     .attr("id", "annotation")
-    .style("top", "400px")
+    .style("top", "500px")
     .style("left", "800px")
     .style("height", "100px")
     .html("The Diesel and Petrol engine cars performs similar, while Petrol engine has better fuel efficiency for 4 cylinders.");
