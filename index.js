@@ -25,9 +25,6 @@ function onNextSlide(){
             break;
         case 3:
             generateSlide3();
-            break;
-        case 4:
-            generateSlide4();
             disableNextButton();
             break;
         default:  
@@ -44,9 +41,6 @@ function onPreviousSlide(){
             break;
         case 2:
             generateSlide2();
-            break;
-        case 3:
-            generateSlide3();
             enableNextButton();
             break;
         default:
@@ -210,7 +204,24 @@ async function generateSlide1(){
         .attr("id", "annotation")
         .style("top", "400px")
         .style("left", "800px")
+        .style("height", "50px")
         .html("Hyundai has the highest MPG because of Electric Engine.")
+
+      //char labels
+      d3.select("#chart1")
+        .append('text')
+        .attr('x', -500)
+        .attr('y', 15)
+        .attr('transform', 'rotate(-90)')
+        .attr('text-anchor', 'middle')
+        .text('Cars')
+
+      d3.select("#chart1")
+        .append('text')
+        .attr('x', 500)
+        .attr('y', 1000)
+        .attr('text-anchor', 'middle')
+        .text('Milage')
 }
 
 async function generateSlide2(){
@@ -246,6 +257,7 @@ async function generateSlide2(){
     .attr("id", "annotation")
     .style("top", "400px")
     .style("left", "500px")
+    .style("height", "50px")
     .html("The smaller size of Engine perofrms better.");
 
 
@@ -296,6 +308,22 @@ async function generateSlide2(){
         chart2_tooltip.style("opacity", 0);
       });
 
+    //char labels
+    d3.select("#chart2")
+      .append('text')
+      .attr('x', -500)
+      .attr('y', 15)
+      .attr('transform', 'rotate(-90)')
+      .attr('text-anchor', 'middle')
+      .text('Highway MPG')
+
+    d3.select("#chart2")
+      .append('text')
+      .attr('x', 500)
+      .attr('y', 1000)
+      .attr('text-anchor', 'middle')
+      .text('City MPG')
+
 }
 
 async function generateSlide3(){
@@ -320,7 +348,8 @@ async function generateSlide3(){
     .attr("id", "annotation")
     .style("top", "400px")
     .style("left", "800px")
-    .html("Annotation for slide 3.");
+    .style("height", "100px")
+    .html("The Diesel and Petrol engine cars performs similar, while Petrol engine has better fuel effenciency for 4 cylinders.");
 
     d3.select("#scene-container")
       .append("svg")
@@ -369,26 +398,22 @@ async function generateSlide3(){
       .attr("fill", function(d) { return getChart3CircleColor(d.Fuel) })
       .attr("stroke", "black")
       .attr("opacity", 0.1);
-}
 
-function generateSlide4(){
-    //clear scene
-    var sceneContainer = d3.select("#scene-container");
-    if (sceneContainer) { sceneContainer.remove(); }
-    
-    //update the page number
-    d3.select("#scene-title")
-    .text("Page "+slide);
+    //char labels
+    d3.select("#chart3")
+      .append('text')
+      .attr('x', -500)
+      .attr('y', 15)
+      .attr('transform', 'rotate(-90)')
+      .attr('text-anchor', 'middle')
+      .text('Engine Cylinder')
 
-    d3.select("#scene-body")
-    .append("div")
-    .attr("id","scene-container")
-    .append("p")
-    .append("id", "scene4-paragraph")
-    .append("text")
-    .text("Template for slide 4.");
-
-    d3.select("#annotation").remove();
+    d3.select("#chart3")
+      .append('text')
+      .attr('x', 500)
+      .attr('y', 1000)
+      .attr('text-anchor', 'middle')
+      .text('Fuel Type')
 }
 
 function disableNextButton(){
